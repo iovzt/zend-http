@@ -59,16 +59,6 @@ class Cookies extends Headers
     protected $cookies = [];
 
     /**
-     * @var \Zend\Http\Headers
-     */
-    protected $headers;
-
-    /**
-     * @var array
-     */
-    protected $rawCookies;
-
-    /**
      * @static
      * @throws Exception\RuntimeException
      * @param $string
@@ -106,7 +96,6 @@ class Cookies extends Headers
                 $this->cookies[$domain][$path] = [];
             }
             $this->cookies[$domain][$path][$cookie->getName()] = $cookie;
-            $this->rawCookies[] = $cookie;
         } else {
             throw new Exception\InvalidArgumentException('Supplient argument is not a valid cookie string or object');
         }
@@ -365,7 +354,7 @@ class Cookies extends Headers
      */
     public function reset()
     {
-        $this->cookies = $this->rawCookies = [];
+        $this->cookies = [];
         return $this;
     }
 }
